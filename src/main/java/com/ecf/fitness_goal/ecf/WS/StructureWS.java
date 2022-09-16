@@ -1,6 +1,7 @@
 package com.ecf.fitness_goal.ecf.WS;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecf.fitness_goal.ecf.BLL.StructureManager;
-import com.ecf.fitness_goal.ecf.BO.Gestion;
 import com.ecf.fitness_goal.ecf.BO.Structure;
 
 @RestController
@@ -27,7 +27,7 @@ public class StructureWS {
     }
 
     @GetMapping("/structure/{id}")
-    public Structure getStructure(@PathVariable("id")Integer id) {
+    public Optional<Structure> getStructure(@PathVariable("id")Integer id) {
         return manager.findStructureById(id);
     }
 
@@ -37,8 +37,8 @@ public class StructureWS {
     }
 
     @PutMapping("/structure/droit")
-    public void changeStructureDroit(@RequestBody Structure structure,@RequestBody Gestion gestion) {
-        manager.updateStructureAndDroit(structure, gestion);
+    public void changeStructureDroit(@RequestBody Structure structure) {
+        manager.updateStructureAndDroit(structure);
     }
 
     @PutMapping("/structure/active")

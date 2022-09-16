@@ -3,6 +3,7 @@ package com.ecf.fitness_goal.ecf.BO;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,15 +21,15 @@ public class Partner {
     @GeneratedValue
     private Integer idPartner;
 
-    @OneToOne
+    @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)
     private User user;
     private String partnerName;
     private boolean partnerActive;
-    @OneToMany
+    @OneToMany(mappedBy = "structureId" ,cascade= CascadeType.ALL)
     private List<Structure> listStructure = new ArrayList<>();
 
 
-    @OneToOne
+    @OneToOne(mappedBy = "gestionId", cascade = CascadeType.ALL)
     private Gestion gestion;
     private String logoUrl;
 

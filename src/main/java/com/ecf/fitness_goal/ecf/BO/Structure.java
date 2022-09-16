@@ -1,5 +1,6 @@
 package com.ecf.fitness_goal.ecf.BO;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,11 +20,11 @@ public class Structure {
 
     @ManyToOne
     private Partner partner;
-    @OneToOne
+    @OneToOne(mappedBy = "userId", cascade = CascadeType.ALL)
     private User user;
     private String structureName;
     private boolean structureActive;
-    @OneToOne
+    @OneToOne(mappedBy = "gestionId", cascade = CascadeType.ALL)
     private Gestion gestion;
 
     public Structure(Integer structureId, Partner partner, User user, String structureName, boolean structureActive,

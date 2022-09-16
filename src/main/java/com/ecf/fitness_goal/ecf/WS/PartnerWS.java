@@ -1,6 +1,7 @@
 package com.ecf.fitness_goal.ecf.WS;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecf.fitness_goal.ecf.BLL.PartnerManager;
-import com.ecf.fitness_goal.ecf.BO.Gestion;
+
 import com.ecf.fitness_goal.ecf.BO.Partner;
 
 @RestController
@@ -26,7 +27,7 @@ public class PartnerWS {
     }
 
     @GetMapping("/partner/{id}")
-    public Partner getPartnerById(@PathVariable("id")Integer id) {
+    public Optional<Partner> getPartnerById(@PathVariable("id")Integer id) {
         return manager.findPartner(id);
     }
 
@@ -36,8 +37,8 @@ public class PartnerWS {
     }
 
     @PutMapping("/partner/droit")
-    public void updatePartnerAndDroit(@RequestBody Partner partner, @RequestBody Gestion gestion) {
-        manager.updatePartnerAndDroit(partner, gestion);
+    public void updatePartnerAndDroit(@RequestBody Partner partner) {
+        manager.updatePartnerAndDroit(partner);
     }
 
     @PutMapping("/partner/active")
